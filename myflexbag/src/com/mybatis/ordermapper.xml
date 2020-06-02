@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.OrderMapper">
+	<select id = "selectall" resultType="order">
+		SELECT * FROM Lorder 
+		WHERE userid=#{userid} 
+		ORDER BY ODATE DESC 
+		limit #{pageStart}, #{perPageNum} 
+	</select>
+	
+	<insert id="insert" parameterType="order">
+		INSERT INTO Lorder VALUES
+		(NULL, #{userid}, #{payid}, '배송현황(배송중)', SYSDATE(),
+		#{receiver}, #{orderphon},
+		#{address}, #{quantitysum}, #{pricesum}, #{gender})
+		 
+		<selectKey keyProperty="orderno" resultType="Integer" order="AFTER"> 
+			SELECT LAST_INSERT_ID()
+		</selectKey> 
+	</insert>
+
+	<delete id="delete">
+		DELETE * FROM Lorder WHERE orderno=#{orderno}
+	</delete>
+	
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

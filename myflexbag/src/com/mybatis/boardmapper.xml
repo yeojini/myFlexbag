@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.BoardMapper">
+	
+	<insert id="insert" parameterType="board">
+		INSERT INTO Lboard (bno,userid,bkind,bdate,btitle,bcon)
+		VALUES (null,#{userid}, #{bkind},sysdate(),#{btitle},#{bcon})
+	</insert>
+	
+	<update id="update" parameterType="board">
+		UPDATE Lboard SET BTITLE=#{btitle},BCON=#{bcon},BKIND=#{bkind} WHERE BNO=#{bno}		
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM Lboard WHERE BNO=#{bno}
+	</delete>
+	
+	<select id="select" parameterType="String" resultType="board">
+		SELECT * FROM Lboard WHERE BNO=#{bno}	
+	</select>
+
+	<select id="selectall" resultType="board">
+		SELECT * FROM Lboard WHERE 1=1
+		<if test="bkind != null"> AND  bkind = #{bkind}	</if>
+		<if test="userid!=null"> AND userid = #{userid} </if>
+		ORDER BY bno DESC, bdate DESC
+		<if test="pageStart != null"> limit #{pageStart}, #{perPageNum} </if>
+	</select>
+
+</mapper>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.PageMapper">
+	
+	<select id="selectall" resultType="page">
+		SELECT count(*) totalcount FROM ${tablename} WHERE 1 = 1
+		<if test="userid != null"> AND  userid = #{userid}	</if>
+		<if test="userid == ''"> </if>
+		
+		<if test="cateid != null"> AND  cateid = #{cateid}	</if>
+		<if test="cateid == ''"> </if>
+		
+		<if test="brandid != null"> AND  brandid = #{brandid}	</if>
+		<if test="brandid == ''"> </if>
+
+		<if test="matid != null"> AND  matid = #{matid}	</if>
+		<if test="matid == ''"> </if>
+				
+		<if test="sortcon == 'popularity'"> ORDER BY pstock ASC </if> 
+		<if test="sortcon == 'pdate'"> ORDER BY pdate DESC	</if> 
+		<if test="sortcon == 'priceasc'"> ORDER BY price ASC </if> 
+		<if test="sortcon == 'pricedesc'"> ORDER BY price DESC </if> 
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
